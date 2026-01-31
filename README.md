@@ -4,7 +4,7 @@
 
 [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=Fellipe0/Hill-Chart-A&project=code.mlx&file=HillChart)
 
-```matlab:Code
+```matlab
 clear
 
 %% Lendo data-set para terino da rede
@@ -29,7 +29,7 @@ net = train(net, input, output, "useParallel", "yes",...
                 );
 ```
 
-```text:Output
+```
 Starting parallel pool (parpool) using the 'local' profile ...
 Connected to the parallel pool (number of workers: 12).
  
@@ -47,10 +47,9 @@ Parallel Workers:
   Worker 10 on Felipe_PC, MEX on PCWIN64
   Worker 11 on Felipe_PC, MEX on PCWIN64
   Worker 12 on Felipe_PC, MEX on PCWIN64
- 
 ```
 
-```matlab:Code
+```matlab
 %% Usando a rede para prever os dados
 predicted = net(input)
 ```
@@ -61,41 +60,14 @@ predicted = 4x1243
     3.3752    3.9602    4.5986    5.2787    6.0104    6.7719    7.5655    8.3620    9.1641    9.9514   10.7420   11.5275   12.3250   13.1214   13.9032   14.6904   15.4826   16.3045   17.1333   17.9656   18.7680   19.5492   20.2976   21.0343   21.7494   22.4592   23.1522   23.8437   24.5213   25.1967   25.8551   26.5067   27.1374   27.7585   28.3582   28.9486   29.5197   30.0843   30.6334   31.1792   31.7117   32.2401   32.7508   33.2485   33.7183   34.1655   34.5856   34.9789   35.3579   35.7149
    26.9805   29.5941   32.1554   34.5850   36.9085   39.0725   41.1207   43.0243   44.8329   46.5247   48.1415   49.6584   51.1072   52.4742   53.7497   54.9640   56.1023   57.1950   58.2266   59.2201   60.1596   61.0687   61.9371   62.7866   63.6030   64.4022   65.1699   65.9230   66.6493   67.3651   68.0584   68.7441   69.4110   70.0736   70.7210   71.3672   72.0006   72.6338   73.2541   73.8724   74.4757   75.0747   75.6579   76.2373   76.8024   77.3640   77.9154   78.4504   78.9821   79.5113
   -16.9839  -16.2621  -15.5265  -14.7936  -14.0514  -13.3157  -12.5741  -11.8423  -11.1082  -10.3871   -9.6661   -8.9592   -8.2526   -7.5529   -6.8653   -6.1739   -5.4886   -4.7943   -4.1052   -3.4108   -2.7271   -2.0422   -1.3690   -0.6939   -0.0290    0.6388    1.2971    1.9584    2.6094    3.2615    3.9010    4.5389    5.1619    5.7810    6.3836    6.9806    7.5602    8.1331    8.6884    9.2366    9.7670   10.2900   10.7958   11.2942   11.7761   12.2507   12.7128   13.1569   13.5894   13.9990
-
 ```
 
-```matlab:Code
+```matlab
 %% Inicio do cálculo de erros
 MAE = sqrt(mean(output'-predicted').^2)
-```
-
-```text:Output
-MAE = 1x4
-    0.0020    0.0003    0.0016    0.0004
-
-```
-
-```matlab:Code
 RMSE = sqrt(mean((output'-predicted').^2))
-```
-
-```text:Output
-RMSE = 1x4
-    0.0559    0.0218    0.0471    0.0325
-
-```
-
-```matlab:Code
 R = []
-```
 
-```text:Output
-R =
-
-     []
-```
-
-```matlab:Code
 for i = 1:size(output,1)
     mdl = fitlm(output(1,:)',predicted(1,:)')
     R = [R,mdl.Rsquared.Adjusted]
@@ -175,7 +147,7 @@ R = 1x4
 
 ```
 
-```matlab:Code
+```matlab
 Error = table(MAE', RMSE',R')
 ```
 
@@ -186,7 +158,7 @@ Error = table(MAE', RMSE',R')
 |3|0.0016|0.0471|0.9999|
 |4|0.0004|0.0325|0.9999|
 
-```matlab:Code
+```matlab
 %% Erros calculados e armazenados, removendo então as variaveis inuteis
 clear MAE RMSE R mdl i
 
@@ -194,33 +166,28 @@ fnew = figure;
 plot(1:50,output(1,1:50),'r--*', 1:50,predicted(1,1:50),'b--o')
 ```
 
-!['/MATLAB Drive/Hill-Chart-A.I/code_media/figure_0.png'
-](code_media/'/MATLAB Drive/Hill-Chart-A.I/code_media/figure_0.png'
-)
+![ANN](https://github.com/Fellipe0/Hill-Chart-A.I/blob/main/code_media/figure_0.png)
 
-```matlab:Code
+```matlab
 plot(1:50,output(2,1:50),'r--*', 1:50,predicted(2,1:50),'b--o')
 ```
 
-!['/MATLAB Drive/Hill-Chart-A.I/code_media/figure_1.png'
-](code_media/'/MATLAB Drive/Hill-Chart-A.I/code_media/figure_1.png'
-)
 
-```matlab:Code
+![ANN](https://github.com/Fellipe0/Hill-Chart-A.I/blob/main/code_media/figure_1.png)
+
+```matlab
 plot(1:50,output(3,1:50),'r--*', 1:50,predicted(3,1:50),'b--o')
 ```
 
-!['/MATLAB Drive/Hill-Chart-A.I/code_media/figure_2.png'
-](code_media/'/MATLAB Drive/Hill-Chart-A.I/code_media/figure_2.png'
-)
 
-```matlab:Code
+![ANN](https://github.com/Fellipe0/Hill-Chart-A.I/blob/main/code_media/figure_2.png)
+
+```matlab
 plot(1:50,output(4,1:50),'r--*', 1:50,predicted(4,1:50),'b--o')
 ```
 
-!['/MATLAB Drive/Hill-Chart-A.I/code_media/figure_3.png'
-](code_media/'/MATLAB Drive/Hill-Chart-A.I/code_media/figure_3.png'
-)
+
+![ANN](https://github.com/Fellipe0/Hill-Chart-A.I/blob/main/code_media/figure_3.png)
 
 ## Requirements:
 <table>
